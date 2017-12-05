@@ -24,6 +24,9 @@ android:
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-25
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_bdeebbcbca30_key -iv $encrypted_bdeebbcbca30_iv -in google-services.json.enc -out twilio-auth-sample/google-services.json -d
+
 after_failure:
   # tests
   - cat twilio-auth-sample/build/reports/tests/testDebugUnitTest/index.html
