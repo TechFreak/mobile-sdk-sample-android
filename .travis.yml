@@ -1,5 +1,13 @@
 language: android
-android:
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+android:    
   components:
     # Uncomment the lines below if you want to
     # use the latest revision of Android SDK Tools
@@ -15,3 +23,11 @@ android:
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-25
+
+after_failure:
+  # tests
+  - cat twilio-auth-sample/build/reports/tests/testDebugUnitTest/index.html
+
+  # twilio-auth-sample
+  - cat twilio-auth-sample/build/reports/lint-results.xml
+  - cat twilio-auth-sample/build/reports/lint-results.html
